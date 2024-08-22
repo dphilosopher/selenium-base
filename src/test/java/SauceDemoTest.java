@@ -12,13 +12,13 @@ public class SauceDemoTest extends BaseTest {
     public void testLoginSuccessful() {
         driver.get("https://www.saucedemo.com/");
 
-        // Enter login credentials
+        // Confirm successful login with standard_user credentials
         driver.findElement(By.id("user-name")).sendKeys("standard_user");
         driver.findElement(By.id("password")).sendKeys("secret_sauce");
         driver.findElement(By.id("login-button")).click();
 
-        // Verify login successful by checking the presence of the inventory container
-        Assertions.assertTrue(driver.findElement(By.id("inventory_container")).isDisplayed(), "Login was not successful, inventory container not found");
+        // Confirm successful login by checking the presence of product header title
+        Assertions.assertTrue(driver.findElement(By.id("right_component")).isDisplayed(), "Login was not successful, inventory container not found");
     }
 
     @Test
@@ -29,7 +29,7 @@ public class SauceDemoTest extends BaseTest {
         driver.findElement(By.id("password")).sendKeys("secret_sauce");
         driver.findElement(By.id("login-button")).click();
 
-        // Verify default sorting (A -> Z)
+        // validate default sorting (A -> Z)
         List<String> itemNames = driver.findElements(By.className("inventory_item_name"))
                 .stream()
                 .map(WebElement::getText)
